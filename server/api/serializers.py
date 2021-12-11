@@ -38,7 +38,7 @@ class WashSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    current_reservation = ReservationSerializer
+    current_reservation = ReservationSerializer()
     favourites = WashSerializer(many=True)
     class Meta:
         model = User

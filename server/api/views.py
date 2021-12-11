@@ -13,12 +13,17 @@ from rest_framework import filters
 from core.models import *
 from .serializers import *
 
+BASE_URL = 'http://188.93.211.127:8000'
 
 class GetUserDataView(views.APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         try:
             data = UserSerializer(request.user).data
+            data['current_reservation']['qr_image'] = BASE_URL + data['current_reservation']['qr_image']
+            for i in data['favourites']:
+                i['image'] = BASE_URL + i['image']
+
             return Response(data, status=status.HTTP_200_OK)
         except Exception: 
             return Response({'status': 'Bad Request'}, status=status.HTTP_400_BAD_REQUEST)
@@ -57,7 +62,7 @@ class GetWashsView(generics.ListAPIView):
             pass
 
         try:
-            queryset = queryset.filter(services__pk=self.request.GET['service'])
+            queryset = queryset.filter(services__type__pk=self.request.GET['service'])
         except Exception:
             pass
 

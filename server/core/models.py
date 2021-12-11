@@ -14,6 +14,10 @@ def update_dataset_metadata(sender, instance=None, created=False, **kwargs):
         instance.code = randint(1000, 9999)
         instance.save()
 
+        user = instance.user
+        user.current_reservation = instance
+        user.save()
+
 
 class User(AbstractBaseUser):
     phone_number = models.CharField(max_length=1000, default='', blank=True, null=True, unique=True)
@@ -100,5 +104,5 @@ class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     wash = models.ForeignKey(Wash, on_delete=models.CASCADE, blank=True, null=True)
     code = models.PositiveIntegerField(blank=True, null=True)
-    qr_image = models.ImageField(blank=True, null=True)
+    qr_image = models.ImageField(upload_to='media/', default='qr.png', blank=True, null=True)
     slot = models.ForeignKey(Slot, on_delete=models.CASCADE, blank=True, null=True)
