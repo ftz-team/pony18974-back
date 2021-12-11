@@ -48,6 +48,7 @@ class GetWashsView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name', 'description']
     ordering_fields = ['price_level', 'rating']
+    filterset_fields = ['id', ]
 
     def get_queryset(self):
         queryset = Wash.objects.all()
@@ -70,7 +71,7 @@ class GetWashsView(generics.ListAPIView):
 
 
 class CreateReservationView(generics.CreateAPIView):
-    queryset = Reservation.objects.all()
+    queryset = Reservation.objects.all().order_by('pk')
     serializer_class = ReservationSerializer
     permission_classes = [AllowAny]
 
@@ -82,7 +83,7 @@ class GetSlotsView(generics.ListAPIView):
 
 
 class GetReviewsView(generics.ListAPIView):
-    queryset = Review.objects.all()
+    queryset = Review.objects.all().order_by('-pk')
     serializer_class = ReviewSerializer
     permission_classes = [AllowAny]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
@@ -96,7 +97,7 @@ class CreateReviewView(generics.CreateAPIView):
 
 
 class GetReservationsView(generics.ListAPIView):
-    queryset = Reservation.objects.all()
+    queryset = Reservation.objects.all().order_by('slot__pk')
     serializer_class = ReservationGetSerializer
     permission_classes = [AllowAny]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
