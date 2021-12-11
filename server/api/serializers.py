@@ -43,3 +43,23 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+
+class UserGgSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['pk', 'name', 'phone_number']
+
+
+class ReservationGetSerializer(serializers.ModelSerializer):
+    user = UserGgSerializer()
+    class Meta:
+        model = Reservation
+        fields = '__all__'
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    user = UserGgSerializer()
+    class Meta:
+        model = Review
+        fields = '__all__'

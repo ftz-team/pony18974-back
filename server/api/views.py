@@ -79,3 +79,25 @@ class GetSlotsView(generics.ListAPIView):
     queryset = Slot.objects.all()
     serializer_class = SlotSerializer
     permission_classes = [AllowAny]
+
+
+class GetReviewsView(generics.ListAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['wash', ]
+
+
+class CreateReviewView(generics.CreateAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [AllowAny]
+
+
+class GetReservationsView(generics.ListAPIView):
+    queryset = Reservation.objects.all()
+    serializer_class = ReservationGetSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['wash', ]

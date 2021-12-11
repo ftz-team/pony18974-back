@@ -106,3 +106,11 @@ class Reservation(models.Model):
     code = models.PositiveIntegerField(blank=True, null=True)
     qr_image = models.ImageField(upload_to='media/', default='qr.png', blank=True, null=True)
     slot = models.ForeignKey(Slot, on_delete=models.CASCADE, blank=True, null=True)
+
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    wash = models.ForeignKey(Wash, on_delete=models.CASCADE, blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    text = models.TextField(blank=True, null=True)
+    

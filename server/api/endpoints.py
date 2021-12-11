@@ -13,4 +13,8 @@ api_urls = [
     path('create_reservation/', CreateReservationView.as_view(), name='create_reservation'),
 
     path('get_slots/', GetSlotsView.as_view(), name='get_slots'),
+
+    path('create_review/', CreateReviewView.as_view(), name='create_review'),
+    path('get_reviews/', GetReviewsView.as_view(), name='get_reviews'),
+    path('get_reservations/', GetReservationsView.as_view(), name='get_reservations'),
 ]
