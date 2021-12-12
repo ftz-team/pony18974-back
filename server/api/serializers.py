@@ -39,6 +39,13 @@ class ReservationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CreateReservationSerializer(serializers.ModelSerializer):
+    wash_name = serializers.ReadOnlyField()
+    class Meta:
+        model = Reservation
+        fields = '__all__'
+
+
 class CreateWashSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wash
