@@ -109,6 +109,11 @@ class Reservation(models.Model):
     qr_image = models.ImageField(upload_to='media/', default='qr.png', blank=True, null=True)
     slot = models.ForeignKey(Slot, on_delete=models.CASCADE, blank=True, null=True)
 
+    @property
+    def wash_name(self):
+        if self.wash is not None:
+            return self.wash.name
+
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)

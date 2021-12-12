@@ -24,6 +24,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 
 
 class ReservationSerializer(serializers.ModelSerializer):
+    wash_name = serializers.ReadOnlyField()
     class Meta:
         model = Reservation
         fields = '__all__'
@@ -66,6 +67,12 @@ class ReservationGetSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     user = UserGgSerializer()
+    class Meta:
+        model = Review
+        fields = '__all__'
+
+
+class CreateReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'

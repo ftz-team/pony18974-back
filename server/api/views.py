@@ -92,7 +92,7 @@ class GetReviewsView(generics.ListAPIView):
 
 class CreateReviewView(generics.CreateAPIView):
     queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
+    serializer_class = CreateReviewSerializer
     permission_classes = [AllowAny]
 
 
