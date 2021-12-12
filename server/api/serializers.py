@@ -23,18 +23,19 @@ class ServiceSerializer(serializers.ModelSerializer):
         fields = ['pk', 'type_name', 'price']
 
 
-class ReservationSerializer(serializers.ModelSerializer):
-    wash_name = serializers.ReadOnlyField()
-    class Meta:
-        model = Reservation
-        fields = '__all__'
-
-
 class WashSerializer(serializers.ModelSerializer):
     services = ServiceSerializer(many=True)
     pk_available_slots = serializers.ReadOnlyField()
     class Meta:
         model = Wash
+        fields = '__all__'
+
+
+class ReservationSerializer(serializers.ModelSerializer):
+    wash_name = serializers.ReadOnlyField()
+    wash = WashSerializer()
+    class Meta:
+        model = Reservation
         fields = '__all__'
 
 
