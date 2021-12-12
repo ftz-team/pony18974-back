@@ -35,7 +35,10 @@ class AddToFavouritesView(views.APIView):
         try:
             wash = Wash.objects.get(pk=request.data['wash'])
             user = request.user
-            user.favourites.add(wash)
+            if wash in user.favourites.all():
+                user.favourites.remove(wash)
+            else:
+                user.favourites.add(wash)
             return Response({'status': 'OK'}, status=status.HTTP_200_OK)
         except Exception: 
             return Response({'status': 'Bad Request'}, status=status.HTTP_400_BAD_REQUEST)
