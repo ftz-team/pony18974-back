@@ -96,6 +96,12 @@ class CreateReviewView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
 
+class UpdateWashView(generics.UpdateAPIView):
+    queryset = Wash.objects.all()
+    serializer_class = WashSerializer
+    permission_classes = [AllowAny]
+
+
 class GetReservationsView(generics.ListAPIView):
     queryset = Reservation.objects.all().order_by('slot__pk')
     serializer_class = ReservationGetSerializer

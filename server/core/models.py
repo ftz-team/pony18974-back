@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.utils import tree
 from random import randint
 from .managers import UserManager
+from .bot import send_message
 
 
 @receiver(post_save, sender='core.Reservation')
@@ -13,11 +14,12 @@ def update_dataset_metadata(sender, instance=None, created=False, **kwargs):
     if created:
         instance.code = randint(1000, 9999)
         instance.save()
-
         user = instance.user
         user.current_reservation = instance
         user.save()
 
+        #bot
+        send_message(instance)
 
 class User(AbstractBaseUser):
     phone_number = models.CharField(max_length=1000, default='', blank=True, null=True, unique=True)
@@ -113,4 +115,3 @@ class Review(models.Model):
     wash = models.ForeignKey(Wash, on_delete=models.CASCADE, blank=True, null=True)
     rating = models.FloatField(blank=True, null=True)
     text = models.TextField(blank=True, null=True)
-    

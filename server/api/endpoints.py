@@ -17,4 +17,5 @@ api_urls = [
     path('create_review/', CreateReviewView.as_view(), name='create_review'),
     path('get_reviews/', GetReviewsView.as_view(), name='get_reviews'),
     path('get_reservations/', GetReservationsView.as_view(), name='get_reservations'),
+    path('upd_wash/<pk>/', UpdateWashView.as_view(), name='upd_wash'),
 ]
